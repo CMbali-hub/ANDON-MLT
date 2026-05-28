@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANDON-MLT | Digital Andon System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .role-selection h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        .role-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .role-btn {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .role-btn:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .role-btn.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .role-btn small {
+            display: block;
+            font-size: 0.75em;
+            font-weight: 400;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .dashboard-container {
+            min-height: 100vh;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-header h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .dashboard-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-card h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .lines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .line-group {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .line-label {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .trolleys {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .trolley-card {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 130px;
+        }
+
+        .trolley-card.empty {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        .trolley-card.empty:hover {
+            border-color: #c0392b;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+        }
+
+        .trolley-card.full {
+            border-color: #27ae60;
+            background: #f0fdf4;
+        }
+
+        .trolley-card.full:hover {
+            border-color: #229954;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+        }
+
+        .trolley-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trolley-letter {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.empty {
+            background: #e74c3c;
+        }
+
+        .status-indicator.full {
+            background: #27ae60;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .trolley-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .status-text {
+            font-size: 0.7em;
+            font-weight: 600;
+            color: #666;
+            text-align: center;
+        }
+
+        .status-icon {
+            font-size: 1.6em;
+        }
+
+        .trolley-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 6px 8px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .toggle-btn {
+            background: #3498db;
+            color: white;
+        }
+
+        .toggle-btn:hover {
+            background: #2980b9;
+        }
+
+        .request-btn {
+            background: #f39c12;
+            color: white;
+        }
+
+        .request-btn:hover {
+            background: #e67e22;
+        }
+
+        .trolley-meta {
+            text-align: center;
+            color: #999;
+            font-size: 0.7em;
+        }
+
+        /* Supervisor Styles */
+        .supervisor-header {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .supervisor-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-card.pending {
+            border-top: 4px solid #e74c3c;
+        }
+
+        .stat-card.fulfilled {
+            border-top: 4px solid #27ae60;
+        }
+
+        .requests-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .requests-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 10px;
+        }
+
+        .requests-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .request-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+            gap: 15px;
+        }
+
+        .request-info {
+            flex: 1;
+        }
+
+        .request-header {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .request-time {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        .fulfill-btn {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .fulfill-btn:hover {
+            background: #229954;
+        }
+
+        /* Manager Styles */
+        .manager-header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .manager-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-top: 4px solid #3498db;
+            transition: all 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .metric-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .metric-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .metric-card.pending {
+            border-top-color: #e74c3c;
+        }
+
+        .metric-card.fulfilled {
+            border-top-color: #27ae60;
+        }
+
+        .metric-card.rate.excellent {
+            border-top-color: #27ae60;
+        }
+
+        .metric-card.rate.warning {
+            border-top-color: #f39c12;
+        }
+
+        .metric-card.rate.critical {
+            border-top-color: #e74c3c;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .dashboard-footer {
+            background: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+            padding: 15px 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lines-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .request-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .fulfill-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>🏭 ANDON-MLT</h1>
+                <p>Digital Andon System for Apparel Production</p>
+            </div>
+
+            <div class="role-selection">
+                <h2>Select Your Role</h2>
+                <div class="role-buttons">
+                    <button class="role-btn active" data-role="operator" onclick="selectRole('operator', this)">
+                        👤 Operator
+                        <small>Sewing Line</small>
+                    </button>
+                    <button class="role-btn" data-role="supervisor" onclick="selectRole('supervisor', this)">
+                        📋 Supervisor
+                        <small>Line Management</small>
+                    </button>
+                    <button class="role-btn" data-role="manager" onclick="selectRole('manager', this)">
+                        👔 Manager
+                        <small>Overview & Analytics</small>
+                    </button>
+                </div>
+            </div>
+
+            <button class="login-btn" onclick="login()">Login as <span id="selectedRole">operator</span></button>
+            <div style="text-align: center; color: #999; font-size: 0.9em;">
+                Demo Mode - Click to login instantly
+            </div>
+        </div>
+    </div>
+
+    <!-- Operator Dashboard -->
+    <div id="operatorDashboard" class="dashboard-container hidden">
+        <header class="dashboard-header">
+            <h1>🏭 Sewing Line Control</h1>
+            <div class="header-right">
+                <span class="user-info">👤 Operator</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="sections-grid" id="operatorGrid"></div>
+        </div>
+
+        <div class="dashboard-footer">
+            <p>Connected • Real-time Updates Active</p>
+        </div>
+    </div>
+
+    <!-- Supervisor Dashboard -->
+    <div id="supervisorDashboard" class="dashboard-container supervisor-header hidden">
+        <header class="dashboard-header supervisor-header">
+            <h1>📋 Supervisor Dashboard</h1>
+            <div class="header-right">
+                <span class="user-info">👤 Supervisor</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content supervisor-content">
+            <div class="stats-grid">
+                <div class="stat-card pending">
+                    <h3>Pending Requests</h3>
+                    <div class="stat-value" id="pendingCount">0</div>
+                </div>
+                <div class="stat-card fulfilled">
+                    <h3>Fulfilled Today</h3>
+                    <div class="stat-value" id="fulfilledCount">0</div>
+                </div>
+            </div>
+
+            <div class="requests-section">
+                <h2>Active Requests</h2>
+                <div id="requestsList" class="requests-list">
+                    <div class="empty-state">✅ No pending requests</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-footer">
+            <p>Last updated: <span id="supervisorTime"></span></p>
+        </div>
+    </div>
+
+    <!-- Manager Dashboard -->
+    <div id="managerDashboard" class="dashboard-container manager-header hidden">
+        <header class="dashboard-header manager-header">
+            <h1>👔 Manager Dashboard</h1>
+            <div class="header-right">
+                <span class="user-info">👤 Manager</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content manager-content">
+            <section>
+                <h2 style="color: #333; margin-bottom: 15px; border-bottom: 2px solid #e74c3c; padding-bottom: 10px;">System Overview</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">📊</div>
+                        <h3>Total Requests (24h)</h3>
+                        <div class="stat-value" id="totalRequests">0</div>
+                    </div>
+
+                    <div class="metric-card pending">
+                        <div class="metric-icon">⏳</div>
+                        <h3>Pending</h3>
+                        <div class="stat-value" id="managerPending">0</div>
+                    </div>
+
+                    <div class="metric-card fulfilled">
+                        <div class="metric-icon">✅</div>
+                        <h3>Fulfilled</h3>
+                        <div class="stat-value" id="managerFulfilled">0</div>
+                    </div>
+
+                    <div class="metric-card rate" id="rateCard">
+                        <div class="metric-icon">📈</div>
+                        <h3>Fulfillment Rate</h3>
+                        <div class="stat-value" id="fulfillmentRate">0%</div>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-top: 20px;">
+                <h2 style="color: #333; margin-bottom: 15px; border-bottom: 2px solid #e74c3c; padding-bottom: 10px;">Trolley Status</h2>
+                <div class="stats-grid">
+                    <div class="stat-card" style="border-top: 4px solid #27ae60;">
+                        <h3>Available Trolleys</h3>
+                        <div class="stat-value" id="availableTrolleys">0</div>
+                        <small id="availableTotal">of 0</small>
+                    </div>
+
+                    <div class="stat-card" style="border-top: 4px solid #e74c3c;">
+                        <h3>Requesting Parts</h3>
+                        <div class="stat-value" id="requestingTrolleys">0</div>
+                        <small id="requestingTotal">of 0</small>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-top: 20px;">
+                <h2 style="color: #333; margin-bottom: 15px; border-bottom: 2px solid #e74c3c; padding-bottom: 10px;">System Recommendations</h2>
+                <div id="recommendationsList" style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 12px; margin-bottom: 8px; background: #f9f9f9; border-radius: 6px; border-left: 4px solid #27ae60; color: #666;">✅ System operational</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <div class="dashboard-footer">
+            <p>Last updated: <span id="managerTime"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let currentUser = null;
+        let trolleys = [];
+        let requests = [];
+
+        // Initialize trolleys on page load
+        function initializeTrolleys() {
+            trolleys = [];
+            for (let section = 1; section <= 4; section++) {
+                for (let line = 1; line <= 6; line++) {
+                    for (let letter of ['A', 'B']) {
+                        trolleys.push({
+                            id: trolleys.length + 1,
+                            section: section,
+                            line: line,
+                            trolley_letter: letter,
+                            status: 'available',
+                            is_empty: true
+                        });
+                    }
+                }
+            }
+            localStorage.setItem('trolleys', JSON.stringify(trolleys));
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const saved = localStorage.getItem('trolleys');
+            if (saved) {
+                trolleys = JSON.parse(saved);
+            } else {
+                initializeTrolleys();
+            }
+
+            const savedRequests = localStorage.getItem('requests');
+            if (savedRequests) {
+                requests = JSON.parse(savedRequests);
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('trolleys', JSON.stringify(trolleys));
+            localStorage.setItem('requests', JSON.stringify(requests));
+        }
+
+        // Role selection
+        function selectRole(role, element) {
+            document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('selectedRole').textContent = role;
+        }
+
+        // Login function
+        function login() {
+            const selectedRole = document.getElementById('selectedRole').textContent;
+            currentUser = {
+                id: 1,
+                username: selectedRole,
+                role: selectedRole
+            };
+
+            document.getElementById('loginScreen').classList.add('hidden');
+
+            if (selectedRole === 'operator') {
+                document.getElementById('operatorDashboard').classList.remove('hidden');
+                renderOperatorDashboard();
+                setInterval(updateOperatorDashboard, 2000);
+            } else if (selectedRole === 'supervisor') {
+                document.getElementById('supervisorDashboard').classList.remove('hidden');
+                renderSupervisorDashboard();
+                setInterval(updateSupervisorDashboard, 2000);
+            } else if (selectedRole === 'manager') {
+                document.getElementById('managerDashboard').classList.remove('hidden');
+                renderManagerDashboard();
+                setInterval(updateManagerDashboard, 2000);
+            }
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('operatorDashboard').classList.add('hidden');
+            document.getElementById('supervisorDashboard').classList.add('hidden');
+            document.getElementById('managerDashboard').classList.add('hidden');
+        }
+
+        // Operator Dashboard Rendering
+        function renderOperatorDashboard() {
+            loadData();
+            const grid = document.getElementById('operatorGrid');
+            grid.innerHTML = '';
+
+            for (let section = 1; section <= 4; section++) {
+                const sectionTrolleys = trolleys.filter(t => t.section === section);
+                const sectionCard = document.createElement('div');
+                sectionCard.className = 'section-card';
+
+                let html = `<h2>Section ${section}</h2><div class="lines-grid">`;
+
+                for (let line = 1; line <= 6; line++) {
+                    const lineTrolleys = sectionTrolleys.filter(t => t.line === line);
+                    html += `<div class="line-group"><div class="line-label">Line ${line}</div><div class="trolleys">`;
+
+                    lineTrolleys.forEach(trolley => {
+                        const statusClass = trolley.is_empty ? 'empty' : 'full';
+                        const statusText = trolley.is_empty ? 'REQUEST PENDING' : 'AVAILABLE';
+                        const icon = trolley.is_empty ? '📦' : '✅';
+                        const btnText = trolley.is_empty ? 'Fill' : 'Empty';
+
+                        html += `
+                            <div class="trolley-card ${statusClass}">
+                                <div class="trolley-header">
+                                    <span class="trolley-letter">${trolley.trolley_letter}</span>
+                                    <span class="status-indicator ${statusClass}"></span>
+                                </div>
+                                <div class="trolley-body">
+                                    <div class="status-text">${statusText}</div>
+                                    <div class="status-icon">${icon}</div>
+                                </div>
+                                <div class="trolley-actions">
+                                    <button class="action-btn toggle-btn" onclick="toggleTrolley(${trolley.id})">${btnText}</button>
+                                    ${trolley.is_empty ? `<button class="action-btn request-btn" onclick="requestParts(${trolley.id})">🔔 Request</button>` : ''}
+                                </div>
+                                <div class="trolley-meta"><small>S${section}:L${line}</small></div>
+                            </div>
+                        `;
+                    });
+
+                    html += `</div></div>`;
+                }
+
+                html += `</div>`;
+                sectionCard.innerHTML = html;
+                grid.appendChild(sectionCard);
+            }
+        }
+
+        function updateOperatorDashboard() {
+            renderOperatorDashboard();
+        }
+
+        // Supervisor Dashboard
+        function renderSupervisorDashboard() {
+            loadData();
+            updateSupervisorStats();
+        }
+
+        function updateSupervisorDashboard() {
+            loadData();
+            updateSupervisorStats();
+        }
+
+        function updateSupervisorStats() {
+            const pending = requests.filter(r => r.status === 'pending').length;
+            const fulfilled = requests.filter(r => r.status === 'fulfilled').length;
+
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('fulfilledCount').textContent = fulfilled;
+            document.getElementById('supervisorTime').textContent = new Date().toLocaleTimeString();
+
+            const requestsList = document.getElementById('requestsList');
+            const pendingRequests = requests.filter(r => r.status === 'pending');
+
+            if (pendingRequests.length === 0) {
+                requestsList.innerHTML = '<div class="empty-state">✅ No pending requests</div>';
+            } else {
+                requestsList.innerHTML = pendingRequests.map(req => `
+                    <div class="request-item">
+                        <div class="request-info">
+                            <div class="request-header">Section ${req.section}, Line ${req.line}, Trolley ${req.trolley_letter}</div>
+                            <div class="request-time">Requested: ${new Date(req.created_at).toLocaleTimeString()}</div>
+                        </div>
+                        <button class="fulfill-btn" onclick="fulfillRequest(${req.id})">✓ Mark Fulfilled</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Manager Dashboard
+        function renderManagerDashboard() {
+            loadData();
+            updateManagerDashboard();
+        }
+
+        function updateManagerDashboard() {
+            loadData();
+
+            // Calculate stats
+            const total = requests.length;
+            const pending = requests.filter(r => r.status === 'pending').length;
+            const fulfilled = requests.filter(r => r.status === 'fulfilled').length;
+            const rate = total > 0 ? Math.round((fulfilled / total) * 100) : 0;
+
+            document.getElementById('totalRequests').textContent = total;
+            document.getElementById('managerPending').textContent = pending;
+            document.getElementById('managerFulfilled').textContent = fulfilled;
+            document.getElementById('fulfillmentRate').textContent = rate + '%';
+            document.getElementById('managerTime').textContent = new Date().toLocaleTimeString();
+
+            // Update rate card color
+            const rateCard = document.getElementById('rateCard');
+            rateCard.classList.remove('excellent', 'good', 'warning', 'critical');
+            if (rate >= 80) rateCard.classList.add('excellent');
+            else if (rate >= 60) rateCard.classList.add('good');
+            else if (rate >= 40) rateCard.classList.add('warning');
+            else rateCard.classList.add('critical');
+
+            // Trolley stats
+            const available = trolleys.filter(t => !t.is_empty).length;
+            const requesting = trolleys.filter(t => t.is_empty).length;
+
+            document.getElementById('availableTrolleys').textContent = available;
+            document.getElementById('availableTotal').textContent = `of ${trolleys.length}`;
+            document.getElementById('requestingTrolleys').textContent = requesting;
+            document.getElementById('requestingTotal').textContent = `of ${trolleys.length}`;
+
+            // Recommendations
+            const recs = [];
+            if (pending > 5) recs.push('📌 High pending requests. Consider allocating more resources.');
+            if (requesting > 6) recs.push('📌 Multiple trolleys requesting parts. Prioritize high-traffic lines.');
+            if (rate < 60) recs.push('⚠️ Fulfillment rate below 60%. Investigate delays.');
+            if (rate >= 80) recs.push('✅ Excellent fulfillment performance. Production is optimal.');
+
+            const recsList = document.getElementById('recommendationsList');
+            recsList.innerHTML = '<ul style="list-style: none; padding: 0;">' + 
+                recs.map(r => `<li style="padding: 12px; margin-bottom: 8px; background: #f9f9f9; border-radius: 6px; border-left: 4px solid #667eea; color: #666;">${r}</li>`).join('') +
+                '</ul>';
+        }
+
+        // Toggle trolley
+        function toggleTrolley(trolleyId) {
+            const trolley = trolleys.find(t => t.id === trolleyId);
+            if (trolley) {
+                trolley.is_empty = !trolley.is_empty;
+                trolley.status = trolley.is_empty ? 'request_pending' : 'available';
+                saveData();
+                updateOperatorDashboard();
+            }
+        }
+
+        // Request parts
+        function requestParts(trolleyId) {
+            const trolley = trolleys.find(t => t.id === trolleyId);
+            if (trolley && trolley.is_empty) {
+                requests.push({
+                    id: requests.length + 1,
+                    trolley_id: trolleyId,
+                    section: trolley.section,
+                    line: trolley.line,
+                    trolley_letter: trolley.trolley_letter,
+                    status: 'pending',
+                    created_at: new Date().toISOString()
+                });
+                saveData();
+                alert(`✓ Parts requested for Section ${trolley.section}, Line ${trolley.line}, Trolley ${trolley.trolley_letter}`);
+                updateOperatorDashboard();
+            }
+        }
+
+        // Fulfill request
+        function fulfillRequest(requestId) {
+            const request = requests.find(r => r.id === requestId);
+            if (request) {
+                request.status = 'fulfilled';
+                request.fulfilled_at = new Date().toISOString();
+                saveData();
+                alert(`✓ Request fulfilled for Section ${request.section}, Line ${request.line}, Trolley ${request.trolley_letter}`);
+                updateSupervisorDashboard();
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadData();
+        });
+    </script>
+</body>
+</html>
