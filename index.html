@@ -127,6 +127,236 @@
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
+        /* Home Screen Styles */
+        .home-container {
+            min-height: 100vh;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .home-header {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .home-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .home-subtitle {
+            font-size: 0.9em;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .home-header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .location-info {
+            text-align: right;
+        }
+
+        .location-info p {
+            font-size: 0.9em;
+            color: #666;
+            margin: 2px 0;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .home-content {
+            flex: 1;
+            padding: 30px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .tile {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .tile-header {
+            height: 8px;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .tile-header.operator {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .tile-header.supervisor {
+            background: linear-gradient(90deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .tile-header.manager {
+            background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .tile-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .tile-icon {
+            font-size: 3em;
+            width: 60px;
+            height: 60px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tile-icon.operator {
+            background: #e3f2fd;
+        }
+
+        .tile-icon.supervisor {
+            background: #fff3e0;
+        }
+
+        .tile-icon.manager {
+            background: #ffebee;
+        }
+
+        .tile-label {
+            font-size: 0.8em;
+            font-weight: 700;
+            color: #27ae60;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .tile-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .tile-description {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .tile-button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .tile-button.operator {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tile-button.operator:hover {
+            transform: translateX(2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .tile-button.supervisor {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+        }
+
+        .tile-button.supervisor:hover {
+            transform: translateX(2px);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        .tile-button.manager {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+
+        .tile-button.manager:hover {
+            transform: translateX(2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
         .dashboard-container {
             min-height: 100vh;
             background: #f5f5f5;
@@ -135,8 +365,8 @@
         }
 
         .dashboard-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: white;
+            color: #333;
             padding: 20px;
             display: flex;
             justify-content: space-between;
@@ -149,24 +379,34 @@
             margin: 0;
         }
 
-        .header-right {
+        .dashboard-header-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
-        .logout-btn {
+        .back-btn {
             padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid white;
+            background: #f0f0f0;
+            color: #333;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: 600;
         }
 
-        .logout-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .back-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .home-footer {
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 15px 20px;
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
         }
 
         .dashboard-content {
@@ -352,17 +592,6 @@
             font-size: 0.7em;
         }
 
-        /* Supervisor Styles */
-        .supervisor-header {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-        }
-
-        .supervisor-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -463,77 +692,6 @@
             background: #229954;
         }
 
-        /* Manager Styles */
-        .manager-header {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-        }
-
-        .manager-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .metric-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            border-top: 4px solid #3498db;
-            transition: all 0.3s;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .metric-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .metric-card h3 {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .metric-value {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .metric-card.pending {
-            border-top-color: #e74c3c;
-        }
-
-        .metric-card.fulfilled {
-            border-top-color: #27ae60;
-        }
-
-        .metric-card.rate.excellent {
-            border-top-color: #27ae60;
-        }
-
-        .metric-card.rate.warning {
-            border-top-color: #f39c12;
-        }
-
-        .metric-card.rate.critical {
-            border-top-color: #e74c3c;
-        }
-
         .empty-state {
             text-align: center;
             padding: 40px 20px;
@@ -544,25 +702,20 @@
             display: none;
         }
 
-        .dashboard-footer {
-            background: #f9f9f9;
-            border-top: 1px solid #e0e0e0;
-            padding: 15px 20px;
-            text-align: center;
-            color: #666;
-            font-size: 0.9em;
-        }
-
         @media (max-width: 768px) {
-            .dashboard-header {
+            .home-header {
                 flex-direction: column;
                 gap: 15px;
                 align-items: flex-start;
             }
 
-            .header-right {
+            .home-header-right {
                 width: 100%;
                 justify-content: space-between;
+            }
+
+            .tiles-grid {
+                grid-template-columns: 1fr;
             }
 
             .sections-grid {
@@ -618,36 +771,102 @@
         </div>
     </div>
 
-    <!-- Operator Dashboard -->
-    <div id="operatorDashboard" class="dashboard-container hidden">
-        <header class="dashboard-header">
-            <h1>🏭 Sewing Line Control</h1>
-            <div class="header-right">
-                <span class="user-info">👤 Operator</span>
+    <!-- Home Screen -->
+    <div id="homeScreen" class="home-container hidden">
+        <div class="home-header">
+            <div>
+                <div class="home-title">🏭 ANDON-MLT</div>
+                <div class="home-subtitle">Production Management System</div>
+            </div>
+            <div class="home-header-right">
+                <div class="location-info">
+                    <p><strong id="userName">Operator</strong></p>
+                    <p id="userLocation">Prestige Maitland | Line PM20</p>
+                </div>
+                <div class="user-avatar" id="userInitial">O</div>
                 <button class="logout-btn" onclick="logout()">Logout</button>
             </div>
-        </header>
+        </div>
+
+        <div class="home-content">
+            <div class="section-title">📊 Real-Time Dashboards</div>
+            
+            <div class="tiles-grid">
+                <!-- Operator Tile -->
+                <div class="tile">
+                    <div class="tile-header operator"></div>
+                    <div class="tile-content">
+                        <div class="tile-icon operator">👤</div>
+                        <div class="tile-label">LIVE</div>
+                        <div class="tile-title">Sewing Line Control</div>
+                        <div class="tile-description">Manage trolley status and send parts requests to sorting room in real-time</div>
+                        <button class="tile-button operator" onclick="goToDashboard('operator')">
+                            Open Dashboard →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Supervisor Tile -->
+                <div class="tile">
+                    <div class="tile-header supervisor"></div>
+                    <div class="tile-content">
+                        <div class="tile-icon supervisor">📋</div>
+                        <div class="tile-label">LIVE</div>
+                        <div class="tile-title">Request Management</div>
+                        <div class="tile-description">Monitor pending requests and fulfill parts deliveries with live statistics</div>
+                        <button class="tile-button supervisor" onclick="goToDashboard('supervisor')">
+                            Open Dashboard →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Manager Tile -->
+                <div class="tile">
+                    <div class="tile-header manager"></div>
+                    <div class="tile-content">
+                        <div class="tile-icon manager">👔</div>
+                        <div class="tile-label">LIVE</div>
+                        <div class="tile-title">System Analytics</div>
+                        <div class="tile-description">View fulfillment performance, trolley utilization and operational insights</div>
+                        <button class="tile-button manager" onclick="goToDashboard('manager')">
+                            Open Dashboard →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="home-footer">
+            <p>✅ System Connected • Real-time Updates Active</p>
+        </div>
+    </div>
+
+    <!-- Operator Dashboard -->
+    <div id="operatorDashboard" class="dashboard-container hidden">
+        <div class="dashboard-header">
+            <h1>🏭 Sewing Line Control</h1>
+            <div class="dashboard-header-right">
+                <button class="back-btn" onclick="goHome()">← Back to Home</button>
+                <span style="color: #666;">👤 Operator</span>
+            </div>
+        </div>
 
         <div class="dashboard-content">
             <div class="sections-grid" id="operatorGrid"></div>
         </div>
-
-        <div class="dashboard-footer">
-            <p>Connected • Real-time Updates Active</p>
-        </div>
     </div>
 
     <!-- Supervisor Dashboard -->
-    <div id="supervisorDashboard" class="dashboard-container supervisor-header hidden">
-        <header class="dashboard-header supervisor-header">
+    <div id="supervisorDashboard" class="dashboard-container hidden">
+        <div class="dashboard-header">
             <h1>📋 Supervisor Dashboard</h1>
-            <div class="header-right">
-                <span class="user-info">👤 Supervisor</span>
-                <button class="logout-btn" onclick="logout()">Logout</button>
+            <div class="dashboard-header-right">
+                <button class="back-btn" onclick="goHome()">← Back to Home</button>
+                <span style="color: #666;">📋 Supervisor</span>
             </div>
-        </header>
+        </div>
 
-        <div class="dashboard-content supervisor-content">
+        <div class="dashboard-content">
             <div class="stats-grid">
                 <div class="stat-card pending">
                     <h3>Pending Requests</h3>
@@ -666,54 +885,46 @@
                 </div>
             </div>
         </div>
-
-        <div class="dashboard-footer">
-            <p>Last updated: <span id="supervisorTime"></span></p>
-        </div>
     </div>
 
     <!-- Manager Dashboard -->
-    <div id="managerDashboard" class="dashboard-container manager-header hidden">
-        <header class="dashboard-header manager-header">
-            <h1>👔 Manager Dashboard</h1>
-            <div class="header-right">
-                <span class="user-info">👤 Manager</span>
-                <button class="logout-btn" onclick="logout()">Logout</button>
+    <div id="managerDashboard" class="dashboard-container hidden">
+        <div class="dashboard-header">
+            <h1>👔 System Analytics</h1>
+            <div class="dashboard-header-right">
+                <button class="back-btn" onclick="goHome()">← Back to Home</button>
+                <span style="color: #666;">👔 Manager</span>
             </div>
-        </header>
+        </div>
 
-        <div class="dashboard-content manager-content">
+        <div class="dashboard-content">
             <section>
-                <h2 style="color: #333; margin-bottom: 15px; border-bottom: 2px solid #e74c3c; padding-bottom: 10px;">System Overview</h2>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-icon">📊</div>
+                <div class="section-title">📊 System Overview</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
                         <h3>Total Requests (24h)</h3>
                         <div class="stat-value" id="totalRequests">0</div>
                     </div>
 
-                    <div class="metric-card pending">
-                        <div class="metric-icon">⏳</div>
+                    <div class="stat-card pending">
                         <h3>Pending</h3>
                         <div class="stat-value" id="managerPending">0</div>
                     </div>
 
-                    <div class="metric-card fulfilled">
-                        <div class="metric-icon">✅</div>
+                    <div class="stat-card fulfilled">
                         <h3>Fulfilled</h3>
                         <div class="stat-value" id="managerFulfilled">0</div>
                     </div>
 
-                    <div class="metric-card rate" id="rateCard">
-                        <div class="metric-icon">📈</div>
+                    <div class="stat-card" style="border-top: 4px solid #3498db;">
                         <h3>Fulfillment Rate</h3>
                         <div class="stat-value" id="fulfillmentRate">0%</div>
                     </div>
                 </div>
             </section>
 
-            <section style="margin-top: 20px;">
-                <h2 style="color: #333; margin-bottom: 15px; border-bottom: 2px solid #e74c3c; padding-bottom: 10px;">Trolley Status</h2>
+            <section style="margin-top: 30px;">
+                <div class="section-title">🚛 Trolley Status</div>
                 <div class="stats-grid">
                     <div class="stat-card" style="border-top: 4px solid #27ae60;">
                         <h3>Available Trolleys</h3>
@@ -728,19 +939,6 @@
                     </div>
                 </div>
             </section>
-
-            <section style="margin-top: 20px;">
-                <h2 style="color: #333; margin-bottom: 15px; border-bottom: 2px solid #e74c3c; padding-bottom: 10px;">System Recommendations</h2>
-                <div id="recommendationsList" style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 12px; margin-bottom: 8px; background: #f9f9f9; border-radius: 6px; border-left: 4px solid #27ae60; color: #666;">✅ System operational</li>
-                    </ul>
-                </div>
-            </section>
-        </div>
-
-        <div class="dashboard-footer">
-            <p>Last updated: <span id="managerTime"></span></p>
         </div>
     </div>
 
@@ -808,16 +1006,36 @@
             };
 
             document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('homeScreen').classList.remove('hidden');
 
-            if (selectedRole === 'operator') {
+            // Set user info
+            document.getElementById('userName').textContent = selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1);
+            document.getElementById('userInitial').textContent = selectedRole.charAt(0).toUpperCase();
+            
+            loadData();
+        }
+
+        // Go to home screen
+        function goHome() {
+            document.getElementById('operatorDashboard').classList.add('hidden');
+            document.getElementById('supervisorDashboard').classList.add('hidden');
+            document.getElementById('managerDashboard').classList.add('hidden');
+            document.getElementById('homeScreen').classList.remove('hidden');
+        }
+
+        // Go to dashboard
+        function goToDashboard(dashboard) {
+            document.getElementById('homeScreen').classList.add('hidden');
+            
+            if (dashboard === 'operator') {
                 document.getElementById('operatorDashboard').classList.remove('hidden');
                 renderOperatorDashboard();
                 setInterval(updateOperatorDashboard, 2000);
-            } else if (selectedRole === 'supervisor') {
+            } else if (dashboard === 'supervisor') {
                 document.getElementById('supervisorDashboard').classList.remove('hidden');
                 renderSupervisorDashboard();
                 setInterval(updateSupervisorDashboard, 2000);
-            } else if (selectedRole === 'manager') {
+            } else if (dashboard === 'manager') {
                 document.getElementById('managerDashboard').classList.remove('hidden');
                 renderManagerDashboard();
                 setInterval(updateManagerDashboard, 2000);
@@ -827,10 +1045,8 @@
         // Logout function
         function logout() {
             currentUser = null;
+            document.getElementById('homeScreen').classList.add('hidden');
             document.getElementById('loginScreen').classList.remove('hidden');
-            document.getElementById('operatorDashboard').classList.add('hidden');
-            document.getElementById('supervisorDashboard').classList.add('hidden');
-            document.getElementById('managerDashboard').classList.add('hidden');
         }
 
         // Operator Dashboard Rendering
@@ -905,7 +1121,6 @@
 
             document.getElementById('pendingCount').textContent = pending;
             document.getElementById('fulfilledCount').textContent = fulfilled;
-            document.getElementById('supervisorTime').textContent = new Date().toLocaleTimeString();
 
             const requestsList = document.getElementById('requestsList');
             const pendingRequests = requests.filter(r => r.status === 'pending');
@@ -934,7 +1149,6 @@
         function updateManagerDashboard() {
             loadData();
 
-            // Calculate stats
             const total = requests.length;
             const pending = requests.filter(r => r.status === 'pending').length;
             const fulfilled = requests.filter(r => r.status === 'fulfilled').length;
@@ -944,17 +1158,7 @@
             document.getElementById('managerPending').textContent = pending;
             document.getElementById('managerFulfilled').textContent = fulfilled;
             document.getElementById('fulfillmentRate').textContent = rate + '%';
-            document.getElementById('managerTime').textContent = new Date().toLocaleTimeString();
 
-            // Update rate card color
-            const rateCard = document.getElementById('rateCard');
-            rateCard.classList.remove('excellent', 'good', 'warning', 'critical');
-            if (rate >= 80) rateCard.classList.add('excellent');
-            else if (rate >= 60) rateCard.classList.add('good');
-            else if (rate >= 40) rateCard.classList.add('warning');
-            else rateCard.classList.add('critical');
-
-            // Trolley stats
             const available = trolleys.filter(t => !t.is_empty).length;
             const requesting = trolleys.filter(t => t.is_empty).length;
 
@@ -962,18 +1166,6 @@
             document.getElementById('availableTotal').textContent = `of ${trolleys.length}`;
             document.getElementById('requestingTrolleys').textContent = requesting;
             document.getElementById('requestingTotal').textContent = `of ${trolleys.length}`;
-
-            // Recommendations
-            const recs = [];
-            if (pending > 5) recs.push('📌 High pending requests. Consider allocating more resources.');
-            if (requesting > 6) recs.push('📌 Multiple trolleys requesting parts. Prioritize high-traffic lines.');
-            if (rate < 60) recs.push('⚠️ Fulfillment rate below 60%. Investigate delays.');
-            if (rate >= 80) recs.push('✅ Excellent fulfillment performance. Production is optimal.');
-
-            const recsList = document.getElementById('recommendationsList');
-            recsList.innerHTML = '<ul style="list-style: none; padding: 0;">' + 
-                recs.map(r => `<li style="padding: 12px; margin-bottom: 8px; background: #f9f9f9; border-radius: 6px; border-left: 4px solid #667eea; color: #666;">${r}</li>`).join('') +
-                '</ul>';
         }
 
         // Toggle trolley
